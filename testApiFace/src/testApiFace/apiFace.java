@@ -1,13 +1,10 @@
 package testApiFace;
-import facebook4j.Comment;
-import facebook4j.Facebook;
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.Version;
+import com.restfb.types.Page;
+
 import facebook4j.FacebookException;
-import facebook4j.FacebookFactory;
-import facebook4j.PagableList;
-import facebook4j.Post;
-import facebook4j.Reading;
-import facebook4j.ResponseList;
-import facebook4j.auth.AccessToken;
 
 public class apiFace {
 
@@ -18,7 +15,7 @@ public class apiFace {
  * @param args
  * @throws FacebookException 
  */
-public static void main(String[] args) throws FacebookException {
+/*public static void main(String[] args) throws FacebookException {
 
     // Generate facebook instance.
     Facebook facebook = new FacebookFactory().getInstance();
@@ -27,7 +24,7 @@ public static void main(String[] args) throws FacebookException {
     // Get an access token from: 
     // https://developers.facebook.com/tools/explorer
     // Copy and paste it below.
-    String accessTokenString = "PASTE_YOUR_ACCESS_TOKEN_HERE";
+    String accessTokenString = "EAADCOZC2ZB0tMBAKtZAS9HQZBMmAstYRo1Uy7zuxcqo3iTdzY3fmOAFsyhooLcaYKgGeiQZALl6EZBXXHKh6jcp2PlAdFgORulwZCX9Ccucojf3ZA0Xhlw09GmlFi1ATnpZCYmNZB1YqDU2jFbSzsAS54LQ5BfKF7yafV4dAGZCAmACIgZDZD";
     AccessToken at = new AccessToken(accessTokenString);
     // Set access token.
     facebook.setOAuthAccessToken(at);
@@ -38,9 +35,8 @@ public static void main(String[] args) throws FacebookException {
     // https://developers.facebook.com/tools/explorer
 
     // Set limit to 25 feeds.
-    ResponseList<Post> feeds = facebook.getFeed("187446750783",
-            new Reading().limit(25));
-
+    ResponseList<Post> feeds = facebook.getHome();//facebook.getFeed();
+    System.out.println("aca"+feeds.size());
         // For all 25 feeds...
         for (int i = 0; i < feeds.size(); i++) {
             // Get post.
@@ -56,5 +52,12 @@ public static void main(String[] args) throws FacebookException {
             String name = post.getFrom().getName();
             String id = post.getId();
         }           
-    }
+    }*/
+	
+	public static void main(String[] args) {
+		String accessToken = "EAADCOZC2ZB0tMBAF44ZBB6ArqTUW90nI2e2tv2naLQZCpAt8ZA9i1KrpKiHFG0aThp0Xv2afTemhVt3MfykppQeUIL9TXWS28g6wGIRgdkDuWnADlDQXSpzuZC7yqjIZAHuelJcCZC2iq8VoSTycZCVKcGnN258G5zzyS8fomM6zkANxiJq3oq8CD6gxZAo6xTe3rWivyOOZBpw4FuBulpXsHuSzZAxiSZCQAfI6FNx55BVuBEjaC8aZAh9WqV";
+		@SuppressWarnings("deprecation")
+		FacebookClient fbClie = new DefaultFacebookClient(accessToken, Version.VERSION_2_5);
+		Page page = fbClie.fetchObject("BillGates", Page.class);
+	}
 }
