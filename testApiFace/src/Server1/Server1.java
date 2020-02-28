@@ -70,16 +70,17 @@ public class Server1 {
 		            }
 		            bfwriter.close();
 		        } while ((query = result.nextQuery()) != null);
+		        
 		        System.exit(0);
 		    } catch (TwitterException | IOException te) {
 		        te.printStackTrace();
 		        System.out.println("Fallo la recoleccion de datos de Tweeter: " + te.getMessage());
 		        System.exit(-1);
-		    }
-			
+		    } 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Server: Socket cerrado"+e);
 		} finally {
 			if (cnx != null) {
 				try {
@@ -87,6 +88,7 @@ public class Server1 {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.err.println(e);
 				}
 			}
 			if (sSocket != null) {
@@ -95,6 +97,7 @@ public class Server1 {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					System.err.println(e);
 				}
 			}
 		}

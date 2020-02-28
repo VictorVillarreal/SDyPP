@@ -5,8 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.net.ServerSocket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
-
 import javax.management.Attribute;
 import javax.management.MBeanServer;
 import javax.management.ObjectName;
@@ -14,6 +14,7 @@ import javax.swing.text.html.parser.AttributeList;
  
 public class LoadBalancer {
 	ServerSocket s;
+	Thread ProcesoReplicar;
 	int port;
 	ArrayList<Host> queue;
 	int nextH;
@@ -26,11 +27,14 @@ public class LoadBalancer {
 		cont= 0;
 	}
 	
+	@SuppressWarnings("deprecation")
 	public void start() throws Exception {
 		try {
 			s = new ServerSocket(port);
 			System.out.println("Server Balanceador levantado");
 			Logger l = new Logger();
+//			ProcesoReplicar = new Replicacion(queue.get(nextH));
+//			ProcesoReplicar.start();
 			//l.loggear("Server Balanceador levantado");
 			//int portNew = 7002;
 			while (true) {
@@ -60,10 +64,23 @@ public class LoadBalancer {
 					//delHost(new Host("localhost", portNew));
 					//portNew--;
 				//}
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				}
+				
+			} catch (UnknownHostException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				
+				try {
+					if(s!= null) {
+						s.close();
+//						ProcesoReplicar.suspend();
+					}	
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
 		}
 		
 	}

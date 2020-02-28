@@ -38,9 +38,11 @@ public class ThreadServer implements Runnable {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println(e);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println(e);
 		}
 		
 	}

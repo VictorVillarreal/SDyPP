@@ -76,3 +76,21 @@ Cliente conectado en el puerto: 5000
 Thread conectando a localhost:7002
 Cliente conectado en el puerto: 5000
 Thread conectando a localhost:7003
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7002
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7002
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7002
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
+Cliente conectado en el puerto: 5000
+Thread conectando a localhost:7001
