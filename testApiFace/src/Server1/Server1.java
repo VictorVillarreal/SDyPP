@@ -39,6 +39,7 @@ public class Server1 {
 			String msg = bR.readLine();
 			//System.out.println("Recibi: " + msg);
 			String linea ;
+			String[] parts = msg.split(" ");			
 			Twitter twitter = new TwitterFactory().getInstance();
 			FileWriter flwriter = null;
 			try {
@@ -52,17 +53,27 @@ public class Server1 {
 		            result = twitter.search(query);
 		            List<Status> tweets = result.getTweets();
 		            for (Status tweet : tweets) {
-		            	linea = "@" + tweet.getUser().getScreenName()+ " - " + tweet.getText();
-		            	bfwriter.write(linea);
-		            	bfwriter.newLine();
-		            	System.err.println(linea); 
+		            	for (int i=-1; i <= parts.length -1; ++i) {
+		            		String Texto = Normalizar(tweet.getText());
+		            		if (i<0) {
+				            	linea = msg + " - " + tweet.getCreatedAt() + " - @"+ tweet.getUser().getName() + " - " + Texto + " - RT: " + tweet.getRetweetCount();
+				            	bfwriter.write(linea);
+				            	bfwriter.newLine();
+				            	System.err.println(linea);
+		            		} else {
+		            			linea = parts[i] + " - " + tweet.getCreatedAt() + " - @"+ tweet.getUser().getName() + " - " + Texto + " - RT: " + tweet.getRetweetCount();
+				            	bfwriter.write(linea);
+				            	bfwriter.newLine();
+				            	System.err.println(linea);
+		            		}
+		            	}
 		            }
 		            bfwriter.close();
 		        } while ((query = result.nextQuery()) != null);
 		        System.exit(0);
 		    } catch (TwitterException | IOException te) {
 		        te.printStackTrace();
-		        System.out.println("Failed to search tweets: " + te.getMessage());
+		        System.out.println("Fallo la recoleccion de datos de Tweeter: " + te.getMessage());
 		        System.exit(-1);
 		    }
 			
@@ -89,8 +100,18 @@ public class Server1 {
 		}
 	}
 	
+	private static String Normalizar(String TextoMje) {
+		String TextoNormalizado = "";
+		String Str1=TextoMje.trim();
+        String Str2=Str1.replaceAll("\\s{2,}", " ");
+        String Str3=Str2.replaceAll("[^a-zA-Z0-9.,\\s]+","");
+        String Str4=Str3.replaceAll("\\,{2,}", ", ");
+    	TextoNormalizado=Str4.replaceAll("\\.{2,}", ". ");
+		return TextoNormalizado;			
+	}
+	
 	public static void main (String args[]) {
-		System.out.println("Iniciando: <localhost>, Puerto: <7001>");
+		System.out.println("Iniciando: <Server1>, Puerto: <7001>");
 		Server1 s = new Server1(7001);
 		
 	}
